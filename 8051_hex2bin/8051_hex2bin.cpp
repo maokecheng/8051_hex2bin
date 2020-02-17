@@ -37,7 +37,7 @@ int main(int argc , char *argv[])
 			printf("file format error\r\n");
 			return 0;
 		}
-		printf("%s\r\n", szline);
+		//printf("%s\r\n", szline);
 		char cbuflen,sztmp[5],csig;
 		unsigned short saddress;
 		sztmp[0] = szline[1]; sztmp[1] = szline[2]; sztmp[2] = 0x00;
@@ -46,14 +46,14 @@ int main(int argc , char *argv[])
 		saddress = strtol(sztmp, NULL, 16);
 		sztmp[0] = szline[7]; sztmp[1] = szline[8]; sztmp[2] = 0x00;
 		csig = strtol(sztmp, NULL, 16);
-		printf("%x,%x,%x\r\n", cbuflen,saddress , csig);
+		//printf("%x,%x,%x\r\n", cbuflen,saddress , csig);
 		if (csig != 0)
 		{
 			if (csig == 1)	break;
 			else
 			{
 				printf("unknow bus!\r\n");
-				break;
+				return 0;
 			}
 		}
 		if (smaxcount < saddress + cbuflen)
@@ -65,7 +65,7 @@ int main(int argc , char *argv[])
 		}
 	}
 	
-	printf("%X", smaxcount);
+	printf("max size %X\r\n", smaxcount);
 	fclose(fhex);
 	//write
 	fbin = fopen(argv[2], "wb");
